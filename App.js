@@ -39,7 +39,11 @@ export default function App() {
           options={{
             tabBarLabel: "Circuits",
             tabBarIcon: ({ color, size }) => (
-              <SimpleLineIcons name="directions" size={24} color="black" />
+              <MaterialCommunityIcons
+                name="go-kart-track"
+                size={24}
+                color="black"
+              />
             ),
           }}
         />
@@ -59,7 +63,11 @@ export default function App() {
           options={{
             tabBarLabel: "Drivers",
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="steering" size={24} color="black" />
+              <MaterialCommunityIcons
+                name="racing-helmet"
+                size={24}
+                color="black"
+              />
             ),
           }}
         />
