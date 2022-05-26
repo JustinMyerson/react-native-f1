@@ -1,50 +1,27 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer, TabActions } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, Text, View, Button } from "react-native";
 import CircuitsScreen from "./screens/CircuitsScreen";
 import ConstructorsScreen from "./screens/ConstructorsScreen";
 import DriversScreen from "./screens/DriversScreen";
 import ResultsScreen from "./screens/ResultsScreen";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const HomeScreen = ({ navigation }) => {
-  return (
-    <View>
-      <Button
-        title="Go to Circuits Screen"
-        onPress={() => navigation.navigate("Circuits", { name: "Justin" })}
-      />
-      <Button
-        title="Go to Constructors Screen"
-        onPress={() => navigation.navigate("Constructors", { name: "Justin" })}
-      />
-      <Button
-        title="Go to Drivers Screen"
-        onPress={() => navigation.navigate("Drivers", { name: "Justin" })}
-      />
-      <Button
-        title="Go to Results Screen"
-        onPress={() => navigation.navigate("Results", { name: "Justin" })}
-      />
-    </View>
-  );
+  return <View></View>;
 };
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: "F1 React Native" }}
-        />
-        <Stack.Screen name="Circuits" component={CircuitsScreen} />
-        <Stack.Screen name="Constructors" component={ConstructorsScreen} />
-        <Stack.Screen name="Drivers" component={DriversScreen} />
-        <Stack.Screen name="Results" component={ResultsScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Circuits" component={CircuitsScreen} />
+        <Tab.Screen name="Constructors" component={ConstructorsScreen} />
+        <Tab.Screen name="Drivers" component={DriversScreen} />
+        <Tab.Screen name="Results" component={ResultsScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
