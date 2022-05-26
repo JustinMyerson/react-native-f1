@@ -1,20 +1,34 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button } from "react-native";
+import CircuitsScreen from "./screens/CircuitsScreen";
+import ConstructorsScreen from "./screens/ConstructorsScreen";
+import DriversScreen from "./screens/DriversScreen";
+import ResultsScreen from "./screens/ResultsScreen";
 
 const Stack = createNativeStackNavigator();
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <Button
-      title="Go to Justin's profile"
-      onPress={() => navigation.navigate("Profile", { name: "Justin" })}
-    />
+    <View>
+      <Button
+        title="Go to Circuits Screen"
+        onPress={() => navigation.navigate("Circuits", { name: "Justin" })}
+      />
+      <Button
+        title="Go to Constructors Screen"
+        onPress={() => navigation.navigate("Constructors", { name: "Justin" })}
+      />
+      <Button
+        title="Go to Drivers Screen"
+        onPress={() => navigation.navigate("Drivers", { name: "Justin" })}
+      />
+      <Button
+        title="Go to Results Screen"
+        onPress={() => navigation.navigate("Results", { name: "Justin" })}
+      />
+    </View>
   );
-};
-const ProfileScreen = ({ navigation, route }) => {
-  return <Text>This is {route.params.name}'s profile</Text>;
 };
 
 export default function App() {
@@ -26,7 +40,10 @@ export default function App() {
           component={HomeScreen}
           options={{ title: "F1 React Native" }}
         />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Circuits" component={CircuitsScreen} />
+        <Stack.Screen name="Constructors" component={ConstructorsScreen} />
+        <Stack.Screen name="Drivers" component={DriversScreen} />
+        <Stack.Screen name="Results" component={ResultsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
