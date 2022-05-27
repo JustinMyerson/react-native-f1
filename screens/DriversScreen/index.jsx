@@ -7,6 +7,7 @@ import {
   Text,
   FlatList,
 } from "react-native";
+import { styles } from "./style";
 
 const DriversScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
@@ -34,7 +35,7 @@ const DriversScreen = ({ navigation }) => {
 
   const Driver = ({ dateOfBirth, familyName, givenName, nationality }) => (
     <View>
-      <Text>
+      <Text style={styles.driver}>
         {givenName} {familyName} {dateOfBirth} {nationality}
       </Text>
     </View>
@@ -70,7 +71,7 @@ const DriversScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ padding: 5 }}>
+    <SafeAreaView style={styles.driverList}>
       <FlatList
         data={drivers}
         renderItem={renderItem}
