@@ -10,32 +10,48 @@ import {
 
 const DriversScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [drivers, setDrivers] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
+    // Reset the error in case we had one last time we
+    // did an api call
+    setError(null);
     fetch("http://ergast.com/api/f1/drivers.json")
       .then((res) => res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
           setDrivers(result.MRData.DriverTable.Drivers);
+          setIsLoading(false);
         },
         (error) => {
-          setIsLoaded(true);
+          setIsLoading(false);
           setError(error);
         }
       );
   }, []);
 
-  if (error) {
+  const Driver = ({ dateOfBirth, familyName, givenName, nationality }) => (
+    <View>
+      <Text>
+        {givenName} {familyName} {dateOfBirth} {nationality}
+      </Text>
+    </View>
+  );
+
+  const renderItem = ({ item }) => {
     return (
-      <View>
-        <Text>Error: {error.message}</Text>
-      </View>
+      <Driver
+        dateOfBirth={item.dateOfBirth}
+        familyName={item.familyName}
+        givenName={item.givenName}
+        nationality={item.nationality}
+      />
     );
-  }
-  if (!isLoaded) {
+  };
+
+  if (isLoading) {
     return (
       <ActivityIndicator
         style={{ marginTop: 20 }}
@@ -45,30 +61,13 @@ const DriversScreen = ({ navigation }) => {
     );
   }
 
-  const Driver = ({ props }) => (
-    <View>
-      <Text>
-        {driver.givenName} {driver.familyName} {driver.dateOfBirth}{" "}
-        {driver.nationality}
-      </Text>
-    </View>
-  );
-
-  // const renderItem = ({ driver }) => {
-  //   return (
-  //     <Driver
-  //       style={{ marginBottom: 10 }}
-  //       dateOfBirth={driver.dateOfBirth}
-  //       familyName={driver.familyName}
-  //       givenName={driver.givenName}
-  //       nationality={driver.nationality}
-  //     />
-  //   );
-  // };
-
-  const renderItem = (props) => {
-    console.log(props);
-  };
+  if (error) {
+    return (
+      <View>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={{ padding: 5 }}>
