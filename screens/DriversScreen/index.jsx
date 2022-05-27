@@ -1,5 +1,12 @@
 import react, { useState, useEffect } from "react";
-import { ActivityIndicator, View, Text } from "react-native";
+import { render } from "react-dom";
+import {
+  SafeAreaView,
+  ActivityIndicator,
+  View,
+  Text,
+  FlatList,
+} from "react-native";
 
 const DriversScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
@@ -28,17 +35,40 @@ const DriversScreen = ({ navigation }) => {
       </View>
     );
   } else if (!isLoaded) {
-    return <ActivityIndicator size="large" color="#00ff00" />;
+    return (
+      <ActivityIndicator
+        style={{ marginTop: 20 }}
+        size="large"
+        color="#039dfc"
+      />
+    );
   } else {
     console.log(drivers);
-    return (
+    const Driver = ({ dateOfBirth, familyName, givenName, nationality }) => (
       <View>
-        {drivers.map((driver) => (
-          <Text>
-            {driver.givenName} {driver.familyName}
-          </Text>
-        ))}
+        <Text>
+          {givenName} {familyName} {dateOfBirth} {nationality}
+        </Text>
       </View>
+    );
+
+    const renderItem = ({ driver }) => (
+      <Driver
+        dateOfBirth={driver.dateOfBirth}
+        familyName={driver.familyName}
+        givenName={driver.givenName}
+        nationality={driver.nationality}
+      />
+    );
+
+    return (
+      <SafeAreaView style={{ padding: 5 }}>
+        <FlatList
+          data={drivers}
+          renderItem={renderItem}
+          keyExtractor={(driver) => driver.driverId}
+        />
+      </SafeAreaView>
     );
   }
 };

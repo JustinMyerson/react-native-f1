@@ -7,7 +7,6 @@ import DriversScreen from "./screens/DriversScreen";
 import ResultsScreen from "./screens/ResultsScreen";
 import {
   Feather,
-  SimpleLineIcons,
   AntDesign,
   Foundation,
   MaterialCommunityIcons,
