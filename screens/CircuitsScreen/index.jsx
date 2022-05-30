@@ -7,6 +7,7 @@ import {
   Text,
   FlatList,
 } from "react-native";
+import { ScreenContainer } from "../../components/ScreenContainer/index";
 import { styles } from "./style";
 
 const CircuitsScreen = ({ navigation }) => {

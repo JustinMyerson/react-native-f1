@@ -1,10 +1,11 @@
 import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
 import CircuitsScreen from "./screens/CircuitsScreen";
 import ConstructorsScreen from "./screens/ConstructorsScreen";
 import DriversScreen from "./screens/DriversScreen";
 import ResultsScreen from "./screens/ResultsScreen";
+import HomeScreen from "./screens/HomeScreen";
 import {
   Feather,
   AntDesign,
@@ -13,10 +14,6 @@ import {
 } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
-
-const HomeScreen = ({ navigation }) => {
-  return <View></View>;
-};
 
 export default function App() {
   return (
@@ -28,7 +25,7 @@ export default function App() {
           options={{
             tabBarLabel: "Home",
             tabBarIcon: ({ color, size }) => (
-              <Feather name="home" size={24} color="black" />
+              <Feather name="home" size={24} color="#9e1111" />
             ),
           }}
         ></Tab.Screen>
@@ -41,7 +38,7 @@ export default function App() {
               <MaterialCommunityIcons
                 name="go-kart-track"
                 size={24}
-                color="black"
+                color="#9e1111"
               />
             ),
           }}
@@ -52,7 +49,7 @@ export default function App() {
           options={{
             tabBarLabel: "Constructors",
             tabBarIcon: ({ color, size }) => (
-              <AntDesign name="team" size={24} color="black" />
+              <AntDesign name="team" size={24} color="#9e1111" />
             ),
           }}
         />
@@ -65,7 +62,7 @@ export default function App() {
               <MaterialCommunityIcons
                 name="racing-helmet"
                 size={24}
-                color="black"
+                color="#9e1111"
               />
             ),
           }}
@@ -76,7 +73,7 @@ export default function App() {
           options={{
             tabBarLabel: "Results",
             tabBarIcon: ({ color, size }) => (
-              <Foundation name="results" size={24} color="black" />
+              <Foundation name="results" size={24} color="#9e1111" />
             ),
           }}
         />
