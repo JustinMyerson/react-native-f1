@@ -17,6 +17,8 @@ const CircuitsScreen = ({ navigation }) => {
   const [circuits, setCircuits] = useState([]);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(30);
+  const [forwardEnabled, setForwardEnabled] = useState(true);
+  const [backwardsEnabled, setBackwardsEnabled] = useState(false);
 
   function handleBackClicked() {
     let difference = offset - 30;
@@ -86,23 +88,29 @@ const CircuitsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.circuitList}>
       <FlatList
+        style={styles.circuitCard}
         data={circuits}
         renderItem={renderItem}
         keyExtractor={(circuit) => circuit.circuitId}
       />
       <View style={styles.buttons}>
-        <Ionicons
-          onPress={() => handleBackClicked()}
-          name="ios-chevron-back-circle-outline"
-          size={44}
-          color="#9e1111"
-        />
-        <Ionicons
-          onPress={() => handleForwardClicked()}
-          name="chevron-forward-circle-outline"
-          size={44}
-          color="#9e1111"
-        />
+        {offset > 30 ? (
+          <Ionicons
+            onPress={() => handleBackClicked()}
+            name="ios-chevron-back-circle-outline"
+            size={44}
+            color="#9e1111"
+          />
+        ) : null}
+
+        {offset > 1 ? (
+          <Ionicons
+            onPress={() => handleForwardClicked()}
+            name="chevron-forward-circle-outline"
+            size={44}
+            color="#9e1111"
+          />
+        ) : null}
       </View>
     </SafeAreaView>
   );
