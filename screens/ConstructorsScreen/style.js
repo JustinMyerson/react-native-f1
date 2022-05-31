@@ -9,4 +9,10 @@ export const styles = StyleSheet.create({
   constructor: {
     marginBottom: 5,
   },
+
+  buttons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });
