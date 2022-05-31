@@ -2,6 +2,9 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   driverView: {
-    backgroundColor: "yellow",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 10,
   },
 });

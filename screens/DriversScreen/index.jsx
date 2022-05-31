@@ -1,11 +1,11 @@
-import react, { useState, useEffect } from "react";
-import { render } from "react-dom";
+import { useState, useEffect } from "react";
 import {
   SafeAreaView,
   ActivityIndicator,
   View,
   Text,
   FlatList,
+  Pressable,
 } from "react-native";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
@@ -27,6 +27,10 @@ const DriversScreen = ({ navigation }) => {
     let difference = total - offset;
     difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
     console.log("forward:", offset);
+  }
+
+  function navigateDriver(driverId) {
+    navigation.navigate("Driver", { driverId });
   }
 
   useEffect(() => {
@@ -59,12 +63,14 @@ const DriversScreen = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <Driver
-        dateOfBirth={item.dateOfBirth}
-        familyName={item.familyName}
-        givenName={item.givenName}
-        nationality={item.nationality}
-      />
+      <Pressable onPress={() => navigateDriver(item.driverId)}>
+        <Driver
+          dateOfBirth={item.dateOfBirth}
+          familyName={item.familyName}
+          givenName={item.givenName}
+          nationality={item.nationality}
+        />
+      </Pressable>
     );
   };
 
@@ -73,7 +79,7 @@ const DriversScreen = ({ navigation }) => {
       <ActivityIndicator
         style={{ marginTop: 20 }}
         size="large"
-        color="#039dfc"
+        color="#9e1111"
       />
     );
   }

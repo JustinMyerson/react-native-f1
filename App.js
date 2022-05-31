@@ -21,8 +21,16 @@ const Stack = createNativeStackNavigator();
 function DriverNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Drivers" component={DriversScreen} />
-      <Stack.Screen name="Driver" component={DriverScreen} />
+      <Stack.Screen
+        name="All Drivers"
+        component={DriversScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Driver"
+        component={DriverScreen}
+        options={{ headerBackVisible: false, headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
@@ -66,7 +74,7 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="DriverNavigator"
+          name="Drivers"
           component={DriverNavigator}
           options={{
             tabBarLabel: "Drivers",
