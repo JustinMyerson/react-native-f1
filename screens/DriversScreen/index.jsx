@@ -34,7 +34,7 @@ const DriversScreen = ({ navigation }) => {
     // Reset the error in case we had one last time we
     // did an api call
     setError(null);
-    fetch("http://ergast.com/api/f1/drivers.json")
+    fetch("http://ergast.com/api/f1/drivers.json?offset=" + offset)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -47,7 +47,7 @@ const DriversScreen = ({ navigation }) => {
           setError(error);
         }
       );
-  }, []);
+  }, [offset]);
 
   const Driver = ({ dateOfBirth, familyName, givenName, nationality }) => (
     <View>
