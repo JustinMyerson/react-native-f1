@@ -20,13 +20,11 @@ const ConstructorsScreen = ({ navigation }) => {
   function handleBackClicked() {
     let difference = offset - 30;
     difference < 0 ? setOffset(0) : setOffset(offset - 30);
-    console.log("back:", offset);
   }
 
   function handleForwardClicked() {
     let difference = total - offset;
     difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
-    console.log("forward:", offset);
   }
 
   useEffect(() => {
