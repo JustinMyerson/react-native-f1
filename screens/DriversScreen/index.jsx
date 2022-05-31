@@ -8,11 +8,26 @@ import {
   FlatList,
 } from "react-native";
 import { styles } from "./style";
+import { Ionicons } from "@expo/vector-icons";
 
 const DriversScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [drivers, setDrivers] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [total, setTotal] = useState(60);
+
+  function handleBackClicked() {
+    let difference = offset - 30;
+    difference < 0 ? setOffset(0) : setOffset(offset - 30);
+    console.log("back:", offset);
+  }
+
+  function handleForwardClicked() {
+    let difference = total - offset;
+    difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
+    console.log("forward:", offset);
+  }
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,6 +39,7 @@ const DriversScreen = ({ navigation }) => {
       .then(
         (result) => {
           setDrivers(result.MRData.DriverTable.Drivers);
+          setTotal(result.MRData.total);
           setIsLoading(false);
         },
         (error) => {
@@ -77,6 +93,20 @@ const DriversScreen = ({ navigation }) => {
         renderItem={renderItem}
         keyExtractor={(driver) => driver.driverId}
       />
+      <View style={styles.buttons}>
+        <Ionicons
+          onPress={() => handleBackClicked()}
+          name="ios-chevron-back-circle-outline"
+          size={24}
+          color="#9e1111"
+        />
+        <Ionicons
+          onPress={() => handleForwardClicked()}
+          name="chevron-forward-circle-outline"
+          size={24}
+          color="#9e1111"
+        />
+      </View>
     </SafeAreaView>
   );
 };

@@ -9,4 +9,10 @@ export const styles = StyleSheet.create({
   driver: {
     marginBottom: 5,
   },
+
+  buttons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });
