@@ -9,4 +9,10 @@ export const styles = StyleSheet.create({
   circuit: {
     marginBottom: 5,
   },
+
+  buttons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
 });

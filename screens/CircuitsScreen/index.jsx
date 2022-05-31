@@ -9,22 +9,38 @@ import {
 } from "react-native";
 import { ScreenContainer } from "../../components/ScreenContainer/index";
 import { styles } from "./style";
+import { Ionicons } from "@expo/vector-icons";
 
 const CircuitsScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [circuits, setCircuits] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [total, setTotal] = useState(30);
+
+  function handleBackClicked() {
+    let difference = offset - 30;
+    difference < 0 ? setOffset(0) : setOffset(offset - 30);
+    console.log("back:", offset);
+  }
+
+  function handleForwardClicked() {
+    let difference = total - offset;
+    difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
+    console.log("forward:", offset);
+  }
 
   useEffect(() => {
     setIsLoading(true);
     // Reset the error in case we had one last time we
     // did an api call
     setError(null);
-    fetch("http://ergast.com/api/f1/circuits.json")
+    fetch("http://ergast.com/api/f1/circuits.json?offset=" + offset)
       .then((res) => res.json())
       .then(
         (result) => {
           setCircuits(result.MRData.CircuitTable.Circuits);
+          setTotal(result.MRData.total);
           setIsLoading(false);
         },
         (error) => {
@@ -32,12 +48,12 @@ const CircuitsScreen = ({ navigation }) => {
           setError(error);
         }
       );
-  }, []);
+  }, [offset]);
 
-  const Circuit = ({ circuitName, Location, country }) => (
+  const Circuit = ({ circuitName, Location }) => (
     <View>
       <Text style={styles.circuit}>
-        {country} {Location} {circuitName}
+        {circuitName} - {Location}
       </Text>
     </View>
   );
@@ -47,7 +63,6 @@ const CircuitsScreen = ({ navigation }) => {
       <Circuit
         circuitName={item.circuitName}
         Location={item.Location.country}
-        country={item.country}
       />
     );
   };
@@ -77,6 +92,20 @@ const CircuitsScreen = ({ navigation }) => {
         renderItem={renderItem}
         keyExtractor={(circuit) => circuit.circuitId}
       />
+      <View style={styles.buttons}>
+        <Ionicons
+          onPress={() => handleBackClicked()}
+          name="ios-chevron-back-circle-outline"
+          size={24}
+          color="#9e1111"
+        />
+        <Ionicons
+          onPress={() => handleForwardClicked()}
+          name="chevron-forward-circle-outline"
+          size={24}
+          color="#9e1111"
+        />
+      </View>
     </SafeAreaView>
   );
 };
