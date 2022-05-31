@@ -1,9 +1,11 @@
 import { NavigationContainer, TabActions } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CircuitsScreen from "./screens/CircuitsScreen";
 import ConstructorsScreen from "./screens/ConstructorsScreen";
 import DriversScreen from "./screens/DriversScreen";
+import DriverScreen from "./screens/DriverScreen";
 import ResultsScreen from "./screens/ResultsScreen";
 import HomeScreen from "./screens/HomeScreen";
 import {
@@ -14,6 +16,16 @@ import {
 } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function DriverNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Drivers" component={DriversScreen} />
+      <Stack.Screen name="Driver" component={DriverScreen} />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -54,8 +66,8 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="Drivers"
-          component={DriversScreen}
+          name="DriverNavigator"
+          component={DriverNavigator}
           options={{
             tabBarLabel: "Drivers",
             tabBarIcon: ({ color, size }) => (

@@ -96,13 +96,13 @@ const CircuitsScreen = ({ navigation }) => {
         <Ionicons
           onPress={() => handleBackClicked()}
           name="ios-chevron-back-circle-outline"
-          size={24}
+          size={44}
           color="#9e1111"
         />
         <Ionicons
           onPress={() => handleForwardClicked()}
           name="chevron-forward-circle-outline"
-          size={24}
+          size={44}
           color="#9e1111"
         />
       </View>
