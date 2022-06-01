@@ -81,11 +81,7 @@ const CircuitsScreen = ({ navigation }) => {
   };
 
   const searchFilterFunction = (text) => {
-    // Check if searched text is not blank
     if (text) {
-      // Inserted text is not blank
-      // Filter the masterDataSource
-      // Update FilteredDataSource
       const newData = circuits.filter(function (item) {
         const itemData = item.circuitName ? item.circuitName : "";
         const textData = text;
@@ -94,8 +90,6 @@ const CircuitsScreen = ({ navigation }) => {
       setFilteredCircuits(newData);
       setSearch(text);
     } else {
-      // Inserted text is blank
-      // Update FilteredDataSource with masterDataSource
       setFilteredCircuits(circuits);
       setSearch(text);
     }
@@ -122,8 +116,8 @@ const CircuitsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.circuitList}>
       <SearchBar
-        placeholder="Track"
-        onPress={() => alert("onPress")}
+        style={styles.searchBar}
+        placeholder="Track Name"
         onChangeText={(text) => searchFilterFunction(text)}
         onClear={(text) => searchFilterFunction("")}
         value={search}
