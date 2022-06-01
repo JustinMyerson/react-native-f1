@@ -85,7 +85,7 @@ const ConstructorsScreen = ({ navigation }) => {
         keyExtractor={(Constructor) => Constructor.constructorId}
       />
       <View style={styles.buttons}>
-        {offset > 30 ? (
+        {offset >= 30 ? (
           <Ionicons
             onPress={() => handleBackClicked()}
             name="ios-chevron-back-circle-outline"

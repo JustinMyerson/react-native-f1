@@ -26,6 +26,7 @@ const CircuitsScreen = ({ navigation }) => {
 
   function handleForwardClicked() {
     difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
+    console.log(offset);
   }
 
   useEffect(() => {
@@ -92,7 +93,7 @@ const CircuitsScreen = ({ navigation }) => {
         keyExtractor={(circuit) => circuit.circuitId}
       />
       <View style={styles.buttons}>
-        {offset > 30 ? (
+        {offset >= 30 ? (
           <Ionicons
             onPress={() => handleBackClicked()}
             name="ios-chevron-back-circle-outline"
