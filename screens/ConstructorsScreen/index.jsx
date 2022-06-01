@@ -17,13 +17,13 @@ const ConstructorsScreen = ({ navigation }) => {
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(30);
 
+  let difference = total - offset;
+
   function handleBackClicked() {
-    let difference = offset - 30;
     difference < 0 ? setOffset(0) : setOffset(offset - 30);
   }
 
   function handleForwardClicked() {
-    let difference = total - offset;
     difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
   }
 
@@ -85,18 +85,22 @@ const ConstructorsScreen = ({ navigation }) => {
         keyExtractor={(Constructor) => Constructor.constructorId}
       />
       <View style={styles.buttons}>
-        <Ionicons
-          onPress={() => handleBackClicked()}
-          name="ios-chevron-back-circle-outline"
-          size={44}
-          color="#9e1111"
-        />
-        <Ionicons
-          onPress={() => handleForwardClicked()}
-          name="chevron-forward-circle-outline"
-          size={44}
-          color="#9e1111"
-        />
+        {offset > 30 ? (
+          <Ionicons
+            onPress={() => handleBackClicked()}
+            name="ios-chevron-back-circle-outline"
+            size={44}
+            color="#9e1111"
+          />
+        ) : null}
+        {difference >= 30 ? (
+          <Ionicons
+            onPress={() => handleForwardClicked()}
+            name="chevron-forward-circle-outline"
+            size={44}
+            color="#9e1111"
+          />
+        ) : null}
       </View>
     </SafeAreaView>
   );
