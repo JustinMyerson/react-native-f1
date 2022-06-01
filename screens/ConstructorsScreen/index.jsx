@@ -10,11 +10,14 @@ import {
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
 import { Card } from "react-native-paper";
+import SearchBar from "react-native-dynamic-search-bar";
 
 const ConstructorsScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [constructors, setConstructors] = useState([]);
+  const [filteredConstructors, setFilteredConstructors] = useState([]);
+  const [search, setSearch] = useState("");
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(30);
 
@@ -38,6 +41,7 @@ const ConstructorsScreen = ({ navigation }) => {
       .then(
         (result) => {
           setConstructors(result.MRData.ConstructorTable.Constructors);
+          setFilteredConstructors(result.MRData.ConstructorTable.Constructors);
           setTotal(result.MRData.total);
           setIsLoading(false);
         },
@@ -62,6 +66,21 @@ const ConstructorsScreen = ({ navigation }) => {
     return <Constructor name={item.name} nationality={item.nationality} />;
   };
 
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = constructors.filter(function (item) {
+        const itemData = item.name ? item.name : "";
+        const textData = text;
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredConstructors(newData);
+      setSearch(text);
+    } else {
+      setFilteredConstructors(constructors);
+      setSearch(text);
+    }
+  };
+
   if (isLoading) {
     return (
       <ActivityIndicator
@@ -82,9 +101,16 @@ const ConstructorsScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.constructorsList}>
+      <SearchBar
+        style={styles.searchBar}
+        placeholder="Track Name"
+        onChangeText={(text) => searchFilterFunction(text)}
+        onClear={(text) => searchFilterFunction("")}
+        value={search}
+      />
       <FlatList
         style={styles.constructorCard}
-        data={constructors}
+        data={filteredConstructors}
         renderItem={renderItem}
         keyExtractor={(Constructor) => Constructor.constructorId}
       />
