@@ -28,6 +28,9 @@ const CircuitsScreen = ({ navigation }) => {
     console.log(offset);
   }
 
+  const countryData = require("country-data");
+  const { getCode, getName } = require("country-list");
+
   useEffect(() => {
     setIsLoading(true);
     // Reset the error in case we had one last time we
@@ -48,11 +51,11 @@ const CircuitsScreen = ({ navigation }) => {
       );
   }, [offset]);
 
-  const Circuit = ({ circuitName, Location, wiki }) => (
+  const Circuit = ({ circuitName, Location, flag }) => (
     <View>
       <Card style={styles.circuit}>
         <Text style={styles.circuitText}>
-          {circuitName} - {Location}
+          {circuitName} - {Location} {flag}
         </Text>
       </Card>
     </View>
@@ -63,7 +66,11 @@ const CircuitsScreen = ({ navigation }) => {
       <Circuit
         circuitName={item.circuitName}
         Location={item.Location.country}
-        wiki={item.url}
+        flag={
+          typeof getCode(item.Location.country) !== "undefined"
+            ? countryData.countries[getCode(item.Location.country)].emoji
+            : ""
+        }
       />
     );
   };
