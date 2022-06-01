@@ -8,11 +8,17 @@ export const styles = StyleSheet.create({
   },
 
   circuit: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 8,
+    marginBottom: 3,
+    backgroundColor: "#c96565",
+  },
+
+  circuitText: {
+    fontSize: 13,
     textAlign: "center",
-    marginBottom: 6,
-    borderColor: "#9e1111",
-    borderWidth: 1,
-    padding: 2,
+    padding: 5,
   },
 
   circuitCard: {

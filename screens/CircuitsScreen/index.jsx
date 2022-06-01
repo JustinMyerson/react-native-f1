@@ -1,5 +1,4 @@
 import react, { useState, useEffect } from "react";
-import { render } from "react-dom";
 import {
   SafeAreaView,
   ActivityIndicator,
@@ -7,7 +6,7 @@ import {
   Text,
   FlatList,
 } from "react-native";
-import { ScreenContainer } from "../../components/ScreenContainer/index";
+import { Card } from "react-native-paper";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -49,11 +48,13 @@ const CircuitsScreen = ({ navigation }) => {
       );
   }, [offset]);
 
-  const Circuit = ({ circuitName, Location }) => (
+  const Circuit = ({ circuitName, Location, wiki }) => (
     <View>
-      <Text style={styles.circuit}>
-        {circuitName} - {Location}
-      </Text>
+      <Card style={styles.circuit}>
+        <Text style={styles.circuitText}>
+          {circuitName} - {Location}
+        </Text>
+      </Card>
     </View>
   );
 
@@ -62,6 +63,7 @@ const CircuitsScreen = ({ navigation }) => {
       <Circuit
         circuitName={item.circuitName}
         Location={item.Location.country}
+        wiki={item.url}
       />
     );
   };
@@ -71,7 +73,7 @@ const CircuitsScreen = ({ navigation }) => {
       <ActivityIndicator
         style={{ marginTop: 20 }}
         size="large"
-        color="#039dfc"
+        color="#9e1111"
       />
     );
   }
