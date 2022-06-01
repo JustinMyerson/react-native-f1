@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 8,
+    marginTop: 8,
     marginBottom: 3,
     backgroundColor: "#c96565",
   },
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
   circuitCard: {
     paddingLeft: 5,
     marginBottom: 5,
-    height: "92%",
+    height: "87%",
   },
 
   buttons: {

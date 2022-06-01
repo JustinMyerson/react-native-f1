@@ -9,13 +9,16 @@ import {
 import { Card } from "react-native-paper";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
+import SearchBar from "react-native-dynamic-search-bar";
 
 const CircuitsScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [circuits, setCircuits] = useState([]);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(30);
+  const [search, setSearch] = useState("");
+  const [filteredCircuits, setFilteredCircuits] = useState([]);
+  const [circuits, setCircuits] = useState([]);
 
   let difference = total - offset;
 
@@ -25,12 +28,10 @@ const CircuitsScreen = ({ navigation }) => {
 
   function handleForwardClicked() {
     difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
-    console.log(offset);
   }
 
   const countryData = require("country-data");
   const { getCode, getName } = require("country-list");
-  console.log(getCode("United States of America", "test"));
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,6 +43,7 @@ const CircuitsScreen = ({ navigation }) => {
       .then(
         (result) => {
           setCircuits(result.MRData.CircuitTable.Circuits);
+          setFilteredCircuits(result.MRData.CircuitTable.Circuits);
           setTotal(result.MRData.total);
           setIsLoading(false);
         },
@@ -78,6 +80,27 @@ const CircuitsScreen = ({ navigation }) => {
     );
   };
 
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = circuits.filter(function (item) {
+        const itemData = item.circuitName ? item.circuitName : "";
+        const textData = text;
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredCircuits(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredCircuits(circuits);
+      setSearch(text);
+    }
+  };
+
   if (isLoading) {
     return (
       <ActivityIndicator
@@ -98,9 +121,16 @@ const CircuitsScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.circuitList}>
+      <SearchBar
+        placeholder="Track"
+        onPress={() => alert("onPress")}
+        onChangeText={(text) => searchFilterFunction(text)}
+        onClear={(text) => searchFilterFunction("")}
+        value={search}
+      />
       <FlatList
         style={styles.circuitCard}
-        data={circuits}
+        data={filteredCircuits}
         renderItem={renderItem}
         keyExtractor={(circuit) => circuit.circuitId}
       />
