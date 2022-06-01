@@ -17,16 +17,14 @@ const CircuitsScreen = ({ navigation }) => {
   const [circuits, setCircuits] = useState([]);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(30);
-  const [forwardEnabled, setForwardEnabled] = useState(true);
-  const [backwardsEnabled, setBackwardsEnabled] = useState(false);
+
+  let difference = total - offset;
 
   function handleBackClicked() {
-    let difference = offset - 30;
     difference < 0 ? setOffset(0) : setOffset(offset - 30);
   }
 
   function handleForwardClicked() {
-    let difference = total - offset;
     difference >= 30 ? setOffset(offset + 30) : setOffset(offset + difference);
   }
 
@@ -103,7 +101,7 @@ const CircuitsScreen = ({ navigation }) => {
           />
         ) : null}
 
-        {offset > 1 ? (
+        {difference >= 30 ? (
           <Ionicons
             onPress={() => handleForwardClicked()}
             name="chevron-forward-circle-outline"
