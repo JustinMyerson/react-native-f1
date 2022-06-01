@@ -103,7 +103,7 @@ const ConstructorsScreen = ({ navigation }) => {
     <SafeAreaView style={styles.constructorsList}>
       <SearchBar
         style={styles.searchBar}
-        placeholder="Track Name"
+        placeholder="Constructor Name"
         onChangeText={(text) => searchFilterFunction(text)}
         onClear={(text) => searchFilterFunction("")}
         value={search}

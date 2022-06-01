@@ -24,12 +24,16 @@ export const styles = StyleSheet.create({
   driversCard: {
     paddingLeft: 5,
     marginBottom: 5,
-    height: "92%",
+    height: "87%",
   },
 
   buttons: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+  },
+
+  searchBar: {
+    marginBottom: 5,
   },
 });
