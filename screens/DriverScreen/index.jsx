@@ -2,10 +2,12 @@ import { ActivityIndicator, View, Text } from "react-native";
 import { useEffect, useState } from "react";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
+import { Card } from "react-native-paper";
 
 function DriverScreen(props, { navigation }) {
   const driverID = props.route.params.driverId;
   const driverURL = "https://ergast.com/api/f1/drivers/" + driverID + ".json";
+  console.log(driverURL);
 
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +51,7 @@ function DriverScreen(props, { navigation }) {
   }
 
   return (
-    <View>
+    <View style={styles.driverView}>
       <Ionicons
         onPress={() => props.navigation.navigate("All Drivers")}
         name="return-up-back"
@@ -57,12 +59,13 @@ function DriverScreen(props, { navigation }) {
         color="#9e1111"
         style={{ paddingLeft: 15 }}
       />
-      <View style={styles.driverView}>
-        <Text>
+      <Card style={styles.driverCard}>
+        <Text style={styles.driverText}>
           {driver.givenName} {driver.familyName}
         </Text>
-        <Text>{driver.nationality}</Text>
-      </View>
+        <Text style={styles.driverText}>{driver.nationality}</Text>
+        <Text style={styles.driverText}>{driver.dateOfBirth}</Text>
+      </Card>
     </View>
   );
 }

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
+import { Card } from "react-native-paper";
 
 const DriversScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
@@ -53,9 +54,11 @@ const DriversScreen = ({ navigation }) => {
 
   const Driver = ({ dateOfBirth, familyName, givenName, nationality }) => (
     <View>
-      <Text style={styles.driver}>
-        {givenName} {familyName} {dateOfBirth} {nationality}
-      </Text>
+      <Card style={styles.drivers}>
+        <Text style={styles.driversText}>
+          {familyName}, {givenName}
+        </Text>
+      </Card>
     </View>
   );
 
@@ -93,6 +96,7 @@ const DriversScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.driverList}>
       <FlatList
+        style={styles.driversCard}
         data={drivers}
         renderItem={renderItem}
         keyExtractor={(driver) => driver.driverId}

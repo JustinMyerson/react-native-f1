@@ -4,10 +4,27 @@ export const styles = StyleSheet.create({
   driverList: {
     marginLeft: 10,
     marginTop: 10,
+    marginRight: 10,
   },
 
-  driver: {
+  drivers: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 8,
+    marginBottom: 3,
+    backgroundColor: "#c96565",
+  },
+
+  driversText: {
+    fontSize: 13,
+    textAlign: "center",
+    padding: 5,
+  },
+
+  driversCard: {
+    paddingLeft: 5,
     marginBottom: 5,
+    height: "92%",
   },
 
   buttons: {
