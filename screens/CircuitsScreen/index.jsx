@@ -30,6 +30,7 @@ const CircuitsScreen = ({ navigation }) => {
 
   const countryData = require("country-data");
   const { getCode, getName } = require("country-list");
+  console.log(getCode("United States of America", "test"));
 
   useEffect(() => {
     setIsLoading(true);
@@ -65,7 +66,9 @@ const CircuitsScreen = ({ navigation }) => {
     return (
       <Circuit
         circuitName={item.circuitName}
-        Location={item.Location.country}
+        Location={
+          item.Location.country === "USA" ? "US" : item.Location.country
+        }
         flag={
           typeof getCode(item.Location.country) !== "undefined"
             ? countryData.countries[getCode(item.Location.country)].emoji
