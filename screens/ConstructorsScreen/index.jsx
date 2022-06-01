@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
+import { Card } from "react-native-paper";
 
 const ConstructorsScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
@@ -49,9 +50,11 @@ const ConstructorsScreen = ({ navigation }) => {
 
   const Constructor = ({ name, nationality }) => (
     <View>
-      <Text style={styles.constructor}>
-        {name} {nationality}
-      </Text>
+      <Card style={styles.constructor}>
+        <Text style={styles.constructorText}>
+          {name} {nationality}
+        </Text>
+      </Card>
     </View>
   );
 
@@ -80,6 +83,7 @@ const ConstructorsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.constructorsList}>
       <FlatList
+        style={styles.constructorCard}
         data={constructors}
         renderItem={renderItem}
         keyExtractor={(Constructor) => Constructor.constructorId}
