@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { styles } from "./style";
+import { Card } from "react-native-paper";
 
 const ResultsScreen = ({ navigation }) => {
   const [error, setError] = useState(null);
@@ -24,7 +25,11 @@ const ResultsScreen = ({ navigation }) => {
       .then((res) => res.json())
       .then(
         (result) => {
-          setResultsArray(result.MRData.RaceTable.Races[0].Results);
+          try {
+            setResultsArray(result.MRData.RaceTable.Races[0].Results);
+          } catch (error) {
+            console.log(error, "Could not load data");
+          }
           setResults(result.MRData.RaceTable.Races);
           setIsLoading(false);
         },
@@ -35,11 +40,15 @@ const ResultsScreen = ({ navigation }) => {
       );
   }, []);
 
+  console.log(results[0].raceName);
+
   const Result = ({ position, firstName, surname, constructor }) => (
     <View>
-      <Text style={styles.result}>
-        {position} - {firstName} {surname} : {constructor}
-      </Text>
+      <Card style={styles.results}>
+        <Text style={styles.resultText}>
+          {position} - {firstName} {surname} : {constructor}
+        </Text>
+      </Card>
     </View>
   );
 
@@ -75,11 +84,10 @@ const ResultsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.resultList}>
       <View style={styles.heading}>
-        <Text>
-          {results[0].season} {results[0].raceName}
-        </Text>
+        <Text style={styles.raceName}>{results[0].raceName}</Text>
       </View>
       <FlatList
+        style={styles.resultCard}
         data={resultsArray}
         renderItem={renderItem}
         keyExtractor={(Result) => Result.Driver.driverId}
