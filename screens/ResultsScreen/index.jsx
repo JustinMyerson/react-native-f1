@@ -40,8 +40,6 @@ const ResultsScreen = ({ navigation }) => {
       );
   }, []);
 
-  console.log(results[0].raceName);
-
   const Result = ({ position, firstName, surname, constructor }) => (
     <View>
       <Card style={styles.results}>
@@ -68,7 +66,7 @@ const ResultsScreen = ({ navigation }) => {
       <ActivityIndicator
         style={{ marginTop: 20 }}
         size="large"
-        color="#039dfc"
+        color="#9e1111"
       />
     );
   }
@@ -84,7 +82,7 @@ const ResultsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.resultList}>
       <View style={styles.heading}>
-        <Text style={styles.raceName}>{results[0].raceName}</Text>
+        {/* <Text style={styles.raceName}>{results[0].raceName}</Text> */}
       </View>
       <FlatList
         style={styles.resultCard}

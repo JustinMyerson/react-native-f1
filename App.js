@@ -8,6 +8,7 @@ import DriversScreen from "./screens/DriversScreen";
 import DriverScreen from "./screens/DriverScreen";
 import ResultsScreen from "./screens/ResultsScreen";
 import HomeScreen from "./screens/HomeScreen";
+import HistoricResults from "./screens/HistoricResultsScreen";
 import {
   Feather,
   AntDesign,
@@ -29,6 +30,23 @@ function DriverNavigator() {
       <Stack.Screen
         name="Driver"
         component={DriverScreen}
+        options={{ headerBackVisible: false, headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function ResultsNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="All Results"
+        component={HistoricResults}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Result"
+        component={ResultsScreen}
         options={{ headerBackVisible: false, headerShown: false }}
       />
     </Stack.Navigator>
@@ -88,8 +106,8 @@ export default function App() {
           }}
         />
         <Tab.Screen
-          name="Results"
-          component={ResultsScreen}
+          name="Historic Results"
+          component={ResultsNavigator}
           options={{
             tabBarLabel: "Results",
             tabBarIcon: ({ color, size }) => (
