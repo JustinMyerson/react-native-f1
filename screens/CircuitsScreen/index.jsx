@@ -117,6 +117,7 @@ const CircuitsScreen = ({ navigation }) => {
     <SafeAreaView style={styles.circuitList}>
       <SearchBar
         style={styles.searchBar}
+        adam
         placeholder="Track Name"
         onChangeText={(text) => searchFilterFunction(text)}
         onClear={(text) => searchFilterFunction("")}

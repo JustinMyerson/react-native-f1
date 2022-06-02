@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 8,
+    marginTop: 8,
     marginBottom: 3,
     backgroundColor: "#c96565",
   },

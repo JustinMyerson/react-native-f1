@@ -19,7 +19,8 @@ const DriversScreen = ({ navigation }) => {
   const [filteredDrivers, setFilteredDrivers] = useState([]);
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState(0);
-  const [total, setTotal] = useState(60);
+
+  const [total, setTotal] = useState(30);
 
   let difference = total - offset;
 
@@ -118,7 +119,7 @@ const DriversScreen = ({ navigation }) => {
         style={styles.searchBar}
         placeholder="Driver Surname"
         onChangeText={(text) => searchFilterFunction(text)}
-        onClear={() => searchFilterFunction("")}
+        onClear={(text) => searchFilterFunction("")}
         value={search}
       />
       <FlatList
@@ -131,7 +132,7 @@ const DriversScreen = ({ navigation }) => {
         {offset >= 30 ? (
           <Ionicons
             onPress={() => handleBackClicked()}
-            familyName="ios-chevron-back-circle-outline"
+            name="ios-chevron-back-circle-outline"
             size={44}
             color="#9e1111"
           />
@@ -139,11 +140,13 @@ const DriversScreen = ({ navigation }) => {
         {difference >= 30 ? (
           <Ionicons
             onPress={() => handleForwardClicked()}
-            familyName="chevron-forward-circle-outline"
+            name="chevron-forward-circle-outline"
             size={44}
             color="#9e1111"
           />
-        ) : null}
+        ) : (
+          console.log("not rendering")
+        )}
       </View>
     </SafeAreaView>
   );
