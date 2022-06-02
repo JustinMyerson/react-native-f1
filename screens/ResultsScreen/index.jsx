@@ -9,8 +9,10 @@ import {
 } from "react-native";
 import { styles } from "./style";
 import { Card } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 
-const ResultsScreen = ({ navigation }) => {
+const ResultsScreen = (props, { navigation }) => {
+  const resultID = props.route.params.resultId;
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);
@@ -81,9 +83,14 @@ const ResultsScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.resultList}>
-      <View style={styles.heading}>
-        {/* <Text style={styles.raceName}>{results[0].raceName}</Text> */}
-      </View>
+      <View style={styles.heading}></View>
+      <Ionicons
+        onPress={() => props.navigation.navigate("All Results")}
+        name="return-up-back"
+        size={44}
+        color="#9e1111"
+        style={{ paddingLeft: 15 }}
+      />
       <FlatList
         style={styles.resultCard}
         data={resultsArray}

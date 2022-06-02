@@ -6,6 +6,7 @@ import {
   View,
   Text,
   FlatList,
+  Pressable,
 } from "react-native";
 import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
@@ -32,7 +33,7 @@ const HistoricResults = ({ navigation }) => {
   }
 
   function navigateResults(resultId) {
-    navigation.navigate("Results", { resultId });
+    navigation.navigate("Result", { resultId });
   }
 
   const countryData = require("country-data");
@@ -77,17 +78,21 @@ const HistoricResults = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <HistoricResult
-        raceName={item.raceName}
-        circuitName={item.Circuit.circuitName}
-        year={item.season}
-        flag={
-          typeof getCode(item.Circuit.Location.country) !== "undefined"
-            ? countryData.countries[getCode(item.Circuit.Location.country)]
-                .emoji
-            : ""
-        }
-      />
+      <Pressable
+        onPress={() => navigateResults(item.Circuit.circuitName + item.season)}
+      >
+        <HistoricResult
+          raceName={item.raceName}
+          circuitName={item.Circuit.circuitName}
+          year={item.season}
+          flag={
+            typeof getCode(item.Circuit.Location.country) !== "undefined"
+              ? countryData.countries[getCode(item.Circuit.Location.country)]
+                  .emoji
+              : ""
+          }
+        />
+      </Pressable>
     );
   };
 
@@ -137,6 +142,7 @@ const HistoricResults = ({ navigation }) => {
         style={styles.resultCard}
         data={filteredResults}
         renderItem={renderItem}
+        keyExtractor={(result) => result.Circuit.circuitName + result.season}
       />
       <View style={styles.buttons}>
         {offset >= 30 ? (
