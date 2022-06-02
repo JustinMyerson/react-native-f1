@@ -15,14 +15,11 @@ import SearchBar from "react-native-dynamic-search-bar";
 const HistoricResults = ({ navigation }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const [historicResultsArray, setHistoricResultsArray] = useState([]);
-
-  const [filteredResults, setFilteredResults] = useState([]);
-  const [search, setSearch] = useState("");
   const [offset, setOffset] = useState(0);
-
   const [total, setTotal] = useState(30);
+  const [search, setSearch] = useState("");
+  const [historicResultsArray, setHistoricResultsArray] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
 
   let difference = total - offset;
 
@@ -38,6 +35,9 @@ const HistoricResults = ({ navigation }) => {
     navigation.navigate("Results", { resultId });
   }
 
+  const countryData = require("country-data");
+  const { getCode, getName } = require("country-list");
+
   useEffect(() => {
     setIsLoading(true);
     // Reset the error in case we had one last time we
@@ -48,6 +48,7 @@ const HistoricResults = ({ navigation }) => {
       .then(
         (result) => {
           setHistoricResultsArray(result.MRData.RaceTable.Races);
+          setFilteredResults(result.MRData.RaceTable.Races);
           setTotal(result.MRData.total);
           setIsLoading(false);
         },
@@ -64,11 +65,11 @@ const HistoricResults = ({ navigation }) => {
   // // Access first result in the first race
   // console.log(historicResultsArray[0].Results[0], "result");
 
-  const HistoricResult = ({ raceName, circuitName, year, country }) => (
+  const HistoricResult = ({ raceName, circuitName, year, flag }) => (
     <View>
       <Card style={styles.results}>
         <Text style={styles.resultText}>
-          {raceName} - {circuitName} ({year})
+          {flag} {raceName} - {circuitName} ({year})
         </Text>
       </Card>
     </View>
@@ -80,7 +81,12 @@ const HistoricResults = ({ navigation }) => {
         raceName={item.raceName}
         circuitName={item.Circuit.circuitName}
         year={item.season}
-        country={item.Circuit.Location.country}
+        flag={
+          typeof getCode(item.Circuit.Location.country) !== "undefined"
+            ? countryData.countries[getCode(item.Circuit.Location.country)]
+                .emoji
+            : ""
+        }
       />
     );
   };
@@ -118,8 +124,6 @@ const HistoricResults = ({ navigation }) => {
     );
   }
 
-  console.log(historicResultsArray.length, "length");
-
   return (
     <SafeAreaView style={styles.resultList}>
       <SearchBar
@@ -133,7 +137,6 @@ const HistoricResults = ({ navigation }) => {
         style={styles.resultCard}
         data={filteredResults}
         renderItem={renderItem}
-        // keyExtractor={(Result) => Result.Driver.driverId}
       />
       <View style={styles.buttons}>
         {offset >= 30 ? (
@@ -151,9 +154,7 @@ const HistoricResults = ({ navigation }) => {
             size={44}
             color="#9e1111"
           />
-        ) : (
-          console.log("not rendering")
-        )}
+        ) : null}
       </View>
     </SafeAreaView>
   );

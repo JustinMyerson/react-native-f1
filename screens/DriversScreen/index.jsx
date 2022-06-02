@@ -57,8 +57,6 @@ const DriversScreen = ({ navigation }) => {
       );
   }, [offset]);
 
-  console.log("test");
-
   const Driver = ({ dateOfBirth, familyName, givenName, nationality }) => (
     <View>
       <Card style={styles.drivers}>
