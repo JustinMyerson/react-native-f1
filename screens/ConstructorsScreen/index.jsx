@@ -5,6 +5,7 @@ import {
   View,
   Text,
   FlatList,
+  Linking,
 } from "react-native";
 import { styles } from "./style";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -51,7 +52,7 @@ const ConstructorsScreen = ({ navigation }) => {
       );
   }, [offset]);
 
-  const Constructor = ({ name, nationality }) => (
+  const Constructor = ({ name, nationality, url }) => (
     <View>
       <Card style={styles.constructor}>
         <Text style={styles.constructorText}>{name}</Text>
@@ -60,7 +61,7 @@ const ConstructorsScreen = ({ navigation }) => {
             name="search-web"
             size={24}
             color="black"
-            onPress={() => console.log("press")}
+            onPress={() => Linking.openURL(url)}
           />
           <Text style={styles.constructorTextBottom}>{nationality}</Text>
         </View>
@@ -69,7 +70,13 @@ const ConstructorsScreen = ({ navigation }) => {
   );
 
   const renderItem = ({ item }) => {
-    return <Constructor name={item.name} nationality={item.nationality} />;
+    return (
+      <Constructor
+        name={item.name}
+        nationality={item.nationality}
+        url={item.url}
+      />
+    );
   };
 
   const searchFilterFunction = (text) => {
