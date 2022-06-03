@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+  bottomView: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
   constructorsList: {
     marginLeft: 10,
     marginTop: 10,

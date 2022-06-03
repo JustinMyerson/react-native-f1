@@ -1,5 +1,4 @@
 import react, { useState, useEffect } from "react";
-import { render } from "react-dom";
 import {
   SafeAreaView,
   ActivityIndicator,
@@ -8,7 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import { styles } from "./style";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Card } from "react-native-paper";
 import SearchBar from "react-native-dynamic-search-bar";
 
@@ -57,6 +56,12 @@ const ConstructorsScreen = ({ navigation }) => {
       <Card style={styles.constructor}>
         <Text style={styles.constructorText}>{name}</Text>
         <View style={styles.bottomView}>
+          <MaterialCommunityIcons
+            name="search-web"
+            size={24}
+            color="black"
+            onPress={() => console.log("press")}
+          />
           <Text style={styles.constructorTextBottom}>{nationality}</Text>
         </View>
       </Card>
