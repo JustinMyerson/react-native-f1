@@ -59,7 +59,7 @@ const ConstructorsScreen = ({ navigation }) => {
         <View style={styles.bottomView}>
           <MaterialCommunityIcons
             name="search-web"
-            size={24}
+            size={30}
             color="black"
             onPress={() => Linking.openURL(url)}
           />

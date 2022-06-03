@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   },
 
   circuitTextBottom: {
-    fontSize: 15,
+    fontSize: 18,
     fontStyle: "italic",
     textAlign: "right",
   },
@@ -43,6 +43,8 @@ export const styles = StyleSheet.create({
 
   bottomView: {
     display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 
   searchBar: {

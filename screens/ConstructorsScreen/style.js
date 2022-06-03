@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   },
 
   constructorTextBottom: {
-    fontSize: 15,
+    fontSize: 18,
     fontStyle: "italic",
     textAlign: "right",
   },

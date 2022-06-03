@@ -5,10 +5,11 @@ import {
   View,
   Text,
   FlatList,
+  Linking,
 } from "react-native";
 import { Card } from "react-native-paper";
 import { styles } from "./style";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import SearchBar from "react-native-dynamic-search-bar";
 
 const CircuitsScreen = ({ navigation }) => {
@@ -54,13 +55,19 @@ const CircuitsScreen = ({ navigation }) => {
       );
   }, [offset]);
 
-  const Circuit = ({ circuitName, Location, flag, city }) => (
+  const Circuit = ({ circuitName, Location, flag, city, url }) => (
     <View>
       <Card style={styles.circuit}>
         <Text style={styles.circuitText}>
           {circuitName} {flag}
         </Text>
         <View style={styles.bottomView}>
+          <MaterialCommunityIcons
+            name="search-web"
+            size={30}
+            color="black"
+            onPress={() => Linking.openURL(url)}
+          />
           <Text style={styles.circuitTextBottom}>
             {" "}
             {city}, {Location}{" "}
@@ -83,6 +90,7 @@ const CircuitsScreen = ({ navigation }) => {
             ? countryData.countries[getCode(item.Location.country)].emoji
             : ""
         }
+        url={item.url}
       />
     );
   };
