@@ -16,7 +16,18 @@ export const styles = StyleSheet.create({
     backgroundColor: "#c96565",
   },
 
-  constructorText: { fontSize: 13, textAlign: "center", padding: 5 },
+  constructorText: {
+    fontWeight: "bold",
+    fontSize: 18,
+    textAlign: "center",
+    padding: 5,
+  },
+
+  constructorTextBottom: {
+    fontSize: 15,
+    fontStyle: "italic",
+    textAlign: "right",
+  },
 
   constructorCard: {
     paddingLeft: 5,

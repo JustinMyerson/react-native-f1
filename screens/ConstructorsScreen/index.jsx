@@ -55,9 +55,10 @@ const ConstructorsScreen = ({ navigation }) => {
   const Constructor = ({ name, nationality }) => (
     <View>
       <Card style={styles.constructor}>
-        <Text style={styles.constructorText}>
-          {name} {nationality}
-        </Text>
+        <Text style={styles.constructorText}>{name}</Text>
+        <View style={styles.bottomView}>
+          <Text style={styles.constructorTextBottom}>{nationality}</Text>
+        </View>
       </Card>
     </View>
   );

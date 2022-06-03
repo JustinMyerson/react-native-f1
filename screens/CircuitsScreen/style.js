@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     textAlign: "center",
-    padding: 5,
+    padding: 8,
   },
 
   circuitTextBottom: {
