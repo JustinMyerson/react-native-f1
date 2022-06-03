@@ -12,6 +12,7 @@ import { styles } from "./style";
 import { Ionicons } from "@expo/vector-icons";
 import { Card } from "react-native-paper";
 import SearchBar from "react-native-dynamic-search-bar";
+import uuid from "react-native-uuid";
 
 const HistoricResults = ({ navigation }) => {
   const [error, setError] = useState(null);
@@ -66,7 +67,7 @@ const HistoricResults = ({ navigation }) => {
   // // Access first result in the first race
   // console.log(historicResultsArray[0].Results[0], "result");
 
-  const HistoricResult = ({ raceName, circuitName, year, flag }) => (
+  const HistoricResult = ({ raceName, circuitName, year, flag, round }) => (
     <View>
       <Card style={styles.results}>
         <Text style={styles.resultText}>
@@ -79,7 +80,7 @@ const HistoricResults = ({ navigation }) => {
   const renderItem = ({ item }) => {
     return (
       <Pressable
-        onPress={() => navigateResults(item.Circuit.circuitName + item.season)}
+        onPress={() => navigateResults(item.season + "/" + item.round)}
       >
         <HistoricResult
           raceName={item.raceName}
@@ -91,6 +92,7 @@ const HistoricResults = ({ navigation }) => {
                   .emoji
               : ""
           }
+          round={item.round}
         />
       </Pressable>
     );
@@ -142,7 +144,7 @@ const HistoricResults = ({ navigation }) => {
         style={styles.resultCard}
         data={filteredResults}
         renderItem={renderItem}
-        keyExtractor={(result) => result.Circuit.circuitName + result.season}
+        keyExtractor={(result) => uuid.v4()}
       />
       <View style={styles.buttons}>
         {offset >= 30 ? (

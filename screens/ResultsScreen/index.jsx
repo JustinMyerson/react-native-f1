@@ -10,6 +10,7 @@ import {
 import { styles } from "./style";
 import { Card } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import uuid from "react-native-uuid";
 
 const ResultsScreen = (props, { navigation }) => {
   const resultID = props.route.params.resultId;
@@ -23,7 +24,7 @@ const ResultsScreen = (props, { navigation }) => {
     // Reset the error in case we had one last time we
     // did an api call
     setError(null);
-    fetch("https://ergast.com/api/f1/current/last/results.json")
+    fetch(`https://ergast.com/api/f1/${resultID}/results.json`)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -95,7 +96,7 @@ const ResultsScreen = (props, { navigation }) => {
         style={styles.resultCard}
         data={resultsArray}
         renderItem={renderItem}
-        keyExtractor={(Result) => Result.Driver.driverId}
+        keyExtractor={(result) => uuid.v4()}
       />
     </SafeAreaView>
   );
