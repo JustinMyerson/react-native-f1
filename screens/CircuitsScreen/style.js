@@ -17,9 +17,16 @@ export const styles = StyleSheet.create({
   },
 
   circuitText: {
-    fontSize: 13,
+    fontWeight: "bold",
+    fontSize: 18,
     textAlign: "center",
     padding: 5,
+  },
+
+  circuitTextBottom: {
+    fontSize: 15,
+    fontStyle: "italic",
+    textAlign: "right",
   },
 
   circuitCard: {
@@ -32,6 +39,10 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+  },
+
+  bottomView: {
+    display: "flex",
   },
 
   searchBar: {

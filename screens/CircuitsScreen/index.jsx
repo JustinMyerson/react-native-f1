@@ -54,12 +54,18 @@ const CircuitsScreen = ({ navigation }) => {
       );
   }, [offset]);
 
-  const Circuit = ({ circuitName, Location, flag }) => (
+  const Circuit = ({ circuitName, Location, flag, city }) => (
     <View>
       <Card style={styles.circuit}>
         <Text style={styles.circuitText}>
-          {circuitName} - {Location} {flag}
+          {circuitName} {flag}
         </Text>
+        <View style={styles.bottomView}>
+          <Text style={styles.circuitTextBottom}>
+            {" "}
+            {city}, {Location}{" "}
+          </Text>
+        </View>
       </Card>
     </View>
   );
@@ -71,6 +77,7 @@ const CircuitsScreen = ({ navigation }) => {
         Location={
           item.Location.country === "USA" ? "US" : item.Location.country
         }
+        city={item.Location.locality}
         flag={
           typeof getCode(item.Location.country) !== "undefined"
             ? countryData.countries[getCode(item.Location.country)].emoji
