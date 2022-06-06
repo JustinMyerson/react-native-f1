@@ -17,9 +17,15 @@ export const styles = StyleSheet.create({
   },
 
   driversText: {
-    fontSize: 13,
+    fontSize: 18,
     textAlign: "center",
     padding: 5,
+  },
+
+  driversTextBottom: {
+    fontSize: 18,
+    fontStyle: "italic",
+    textAlign: "right",
   },
 
   driversCard: {
@@ -32,6 +38,12 @@ export const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+  },
+
+  bottomView: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 
   searchBar: {

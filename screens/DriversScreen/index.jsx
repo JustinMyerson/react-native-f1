@@ -6,9 +6,10 @@ import {
   Text,
   FlatList,
   Pressable,
+  Linking,
 } from "react-native";
 import { styles } from "./style";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Card } from "react-native-paper";
 import SearchBar from "react-native-dynamic-search-bar";
 
@@ -57,12 +58,21 @@ const DriversScreen = ({ navigation }) => {
       );
   }, [offset]);
 
-  const Driver = ({ dateOfBirth, familyName, givenName, nationality }) => (
+  const Driver = ({ dateOfBirth, familyName, givenName, nationality, url }) => (
     <View>
       <Card style={styles.drivers}>
         <Text style={styles.driversText}>
           {familyName}, {givenName}
         </Text>
+        <View style={styles.bottomView}>
+          <MaterialCommunityIcons
+            name="search-web"
+            size={30}
+            color="black"
+            onPress={() => Linking.openURL(url)}
+          />
+          <Text style={styles.driversTextBottom}>{nationality}</Text>
+        </View>
       </Card>
     </View>
   );
@@ -75,6 +85,7 @@ const DriversScreen = ({ navigation }) => {
           familyName={item.familyName}
           givenName={item.givenName}
           nationality={item.nationality}
+          url={item.url}
         />
       </Pressable>
     );
