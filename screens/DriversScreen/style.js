@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     padding: 5,
+    fontWeight: "bold",
   },
 
   driversTextBottom: {
